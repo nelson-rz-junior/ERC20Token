@@ -177,7 +177,9 @@ contract ERC20Token is ERC20, Whitelist, Pausable {
         return allowed[owner][spender];
     }
 
-    function transfer(address to, uint256 value) public verify(msg.sender, to, value) whenNotPaused returns (bool success) {
+    function transfer(address to, uint256 value) public verify(msg.sender, to, value) whenNotPaused 
+        returns (bool success) 
+    {
         // it checks whether the account (to) is valid
         require(to != address(0) && balances[msg.sender] > value);
         balances[msg.sender] -= value;
@@ -186,7 +188,9 @@ contract ERC20Token is ERC20, Whitelist, Pausable {
         return true;
     }
 
-    function transferFrom(address from, address spender, uint256 value) public verify(from, spender, value) whenNotPaused returns (bool) {
+    function transferFrom(address from, address spender, uint256 value) public verify(from, spender, value) 
+        whenNotPaused returns (bool) 
+    {
         require(spender != address(0) && value <= balances[from] && value <= allowed[from][msg.sender]);
         balances[from] -= value;
         balances[spender] += value;
